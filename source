@@ -11,6 +11,7 @@
 * 5. Situational userScore text based on how many rounds user got right. Ex: User got all 10 rounds right it'll say:
 * Great job! You got 10 out of 10 rounds correct! You are now ready to tackle the next difficulty! 
 * Rounds 8-10 will be you're ready for next level. 4-7 will be "Great Job". 0-3 will be "Almost there! Keep going!" Something like that
+* 6. Add if two neighboring letters are the same, it "rerolls" either letter.
 */
 
 
@@ -69,7 +70,7 @@ int main(){
       }
       std::cout << simonPattern << "\n";
       _sleep(2500); //Waits 2.5 seconds before clearing screen
-   } else{
+   } else if(userIn == "3"){
       //Hard mode pattern gen
       for(i=0; i<8; i++){
          std::string pattern[8] = {"A", "B", "C", "D", "E", "F", "G", "H"};
@@ -87,14 +88,39 @@ int main(){
    std::cout<<"Enter Simon's Pattern:\n";
    std::cin >> userPattern;
 
-//Logic to test each patter
-   for(i=0; i < simonPattern.size(); i++){
-      if(userPattern.at(i) == simonPattern.at(i)){
-         userScore += 1;
-      } else {
-         break;
+//If the size of user input size != simon pattern size, it adds spaces to up to simon pattern size
+
+   if(userPattern.size() != simonPattern.size()){
+      int i;
+      if(userIn == "1"){
+         int spacesToAdd = 3 - userPattern.size();
+         for(i=0; i < spacesToAdd; i++){
+            userPattern.append(" ");
+         }
+      } else if(userIn == "2"){
+         int spacesToAdd = 5 - userPattern.size();
+         for(i=0; i < spacesToAdd; i++){
+            userPattern.append(" ");
+         }
+      } else if(userIn == "3"){
+         int spacesToAdd = 8 - userPattern.size();
+         for(i=0; i < spacesToAdd; i++){
+            userPattern.append(" ");
+         }
       }
    }
+
+//Test Patterns Logic
+   for(i=0; i < simonPattern.size(); i++){
+      if(userPattern.at(i) != simonPattern.at(i)){
+         break;
+      } else {
+         userScore += 1;
+      }
+   }
+
+//Output
+   std::cout << "Your score is: " << userScore;
 
   return 0;
 
