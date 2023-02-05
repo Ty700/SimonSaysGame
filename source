@@ -6,13 +6,17 @@
 * Goals: 
 * 1. Convert Simon logic to a function, then call that function in main when it wants to generate pattern. Makes code easier to read
 * 2. Make it compute lowercase letters = uppercase letters. Right now it says "M" != "m"
-* 3. Round counter. Round 1 outputs 1 letter. Round 2 outputs 2 letters. To the max number of letters allowed for that difficulty. Rather than it just output all characters at once.
-* 4. Score is based off how many rounds the user got right, and will go to a max of 10 rounds. 
-* 5. Add if two neighboring letters are the same, it "rerolls" either letter.
+* 3a. Round counter. Round 1 outputs 1 letter. Round 2 outputs 2 letters. To the max number of letters allowed for that difficulty. Rather than it just output all characters at once.
+* 3b. Score is based off how many rounds the user got right, and will go to a max of 10 rounds. 
+*
+*
+*  Completed Goals:
+* 4. Add if two neighboring letters are the same, it "rerolls" either letter.
+* 5. Situational userScore text based on how many rounds user got right. Ex: User got all 10 rounds right it'll say:
+* Great job! You got 10 out of 10 rounds correct! You are now ready to tackle the next difficulty! 
+* Rounds 8-10 will be you're ready for next level. 4-7 will be "Great Job". 0-3 will be "Almost there! Keep going!" Something like that
+*
 */
-
-
-
 
 #include <string>
 #include <iostream>
@@ -25,7 +29,10 @@ void blank(int num);
 std::string patterGen(int dif);
 void scoreOutput(int userScore, int userIn);
 
+
+
 int main(){
+
 //Variable Initialization
    std::string simonPattern;
    std::string userPattern;
@@ -56,30 +63,50 @@ int main(){
 
    if(userIn == 1){
    //Easy Mode pattern gen
-      for(i=0; i<3; i++){
-         std::string pattern[3] = {"A", "B", "C"};
+      for(i=0; i < 3; i++){
+         std::string pattern[4] = {"A", "B", "C", "D"};
          int randIndex = rand() % 3;
          simonPattern.append(pattern[randIndex]);
+   //Logic Check for when two characters are the same it'll "reroll" the letter
+         if(i>0){  
+            while(simonPattern.at(i) == simonPattern.at(i-1)){
+               simonPattern.replace(i,1,(pattern[randIndex + 1]));
+            }
+         }
       }
       std::cout << simonPattern << "\n";
       _sleep(5000); //Waits 5 seconds before clearing screen
       blank(100);
+
    } else if(userIn == 2){
-      //Medium mode pattern gen
+   //Medium mode pattern gen
       for(i=0; i<5; i++){
-         std::string pattern[5] = {"A", "B", "C", "D", "E"};
+         std::string pattern[6] = {"A", "B", "C", "D", "E", "F"};
          int randIndex = rand() % 5;
          simonPattern.append(pattern[randIndex]);
+   //Logic Check for when two characters are the same it'll "reroll" the letter
+            if(i>0){
+            while(simonPattern.at(i) == simonPattern.at(i-1)){
+               simonPattern.replace(i,1,(pattern[randIndex + 1]));
+            }
+         }
       }
       std::cout << simonPattern << "\n";
       _sleep(2500); //Waits 2.5 seconds before clearing screen
       blank(100);
+
    } else if(userIn == 3){
-      //Hard mode pattern gen
+   //Hard mode pattern gen
       for(i=0; i<8; i++){
-         std::string pattern[8] = {"A", "B", "C", "D", "E", "F", "G", "H"};
+         std::string pattern[9] = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
          int randIndex = rand() % 8;
          simonPattern.append(pattern[randIndex]);
+   //Logic Check for when two characters are the same it'll "reroll" the letter
+            if(i>0){
+            while(simonPattern.at(i) == simonPattern.at(i-1)){
+               simonPattern.replace(i,1,(pattern[randIndex + 1]));
+            }
+         }
       }
       std::cout << simonPattern << "\n";
       _sleep(1000); //Waits 1 second before clearing screen
