@@ -75,7 +75,7 @@ int main(){
          }
       }
       std::cout << simonPattern << "\n";
-      _sleep(5000); //Waits 5 seconds before clearing screen
+      _sleep(3500); //Waits 3.5 seconds before clearing screen
       blank(100);
 
    } else if(userIn == 2){
@@ -109,7 +109,7 @@ int main(){
          }
       }
       std::cout << simonPattern << "\n";
-      _sleep(1000); //Waits 1 second before clearing screen
+      _sleep(1500); //Waits 1 second before clearing screen
       blank(100);
    }
 
@@ -167,9 +167,6 @@ void blank(int num){
 //Logic for each difficulties output 
 void scoreOutput(int userScore, int userIn){
    std::cout << "Your score is: " << userScore << "\n";
-   bool easy = false;
-   bool mid = false;
-   bool hard = false;
 
    if(userIn == 1){
       //Easy Outputs
@@ -189,10 +186,12 @@ void scoreOutput(int userScore, int userIn){
          std::cout << "Gah. Better luck next time!";
       }
    } else if(userIn == 3){
-      if(userScore > 7){
-         std::cout << "Amazing Job! I think you're ready for the next level!";
+      if(userScore == 10){
+         std::cout << "Amazing Job! You beat the game!";
+      } else if(userScore > 7){
+         std::cout << "Amazing Job! Just a tad bit further!";
       } else if((userScore <= 7) && (userScore > 4)){
-         std::cout << "Good Job! Almost ready for the next level!";
+         std::cout << "Good Job!! You're almost there!";
       } else {
          std::cout << "Gah. Better luck next time!";
       }
