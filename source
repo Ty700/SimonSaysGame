@@ -1,6 +1,7 @@
 /*
 * Author: Tyler Scotti
-* Date: Feb 4, 2023
+* Date: Feb 4, 2023 
+* NOTE: THIS WAS WRITTEN VERY EARLY IN MY LEARNING OF C++. DONT MIND THE MISTAKES OR OVERCOMPLICATION OF FUNCTIONS.
 * Description: A simple Simon Says game with 3 difficulties
 *
 * Goals: 
