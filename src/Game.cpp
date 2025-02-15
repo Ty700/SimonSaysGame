@@ -17,7 +17,7 @@ void Game::generatePattern(void){
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> dis(0, patternElementsLength - 1);
-    for(int i = 0; i < this->gameRound; i++){
+    for(unsigned int i = 0; i < this->gameRound; i++){
         int newElementIdx = dis(gen);
         this->currentPattern += patternElements[newElementIdx];
     }
@@ -28,7 +28,7 @@ void Game::generatePattern(void){
  * @PARAM:      VOID
  * @RETURNS:    VOID 
  */
-void Game::showPattern(){
+void Game::showPattern(void){
     std::cout << "Simon Says to Enter:\n";
     std::cout << this->currentPattern << std::endl;
 
@@ -47,7 +47,7 @@ void Game::showPattern(){
  * @PARAMS:      VOID 
  * @RETURNS:     VOID - Sets Game's member currentUserPattern 
  */
-void Game::getUserPattern(){
+void Game::getUserPattern(void){
     std::cout << "Simon Says to Enter your Guess:\n";
     std::cin >> this->currentUserPattern;
 }
@@ -58,7 +58,7 @@ void Game::getUserPattern(){
  * @RETURNS:    VOID 
  */
 void sanatizePatterns(std::string& ptrn){
-    for(int i = 0; i < ptrn.length(); i++){
+    for(size_t i = 0; i < ptrn.length(); i++){
         ptrn[i] = tolower(ptrn[i]);
     }
 }
@@ -68,7 +68,7 @@ void sanatizePatterns(std::string& ptrn){
  * @PARAMS:     VOID 
  * @RETURNS:    True -> If patterns are the same | False -> if patterns are not the same 
  */
-bool Game::comparePatterns(){
+bool Game::comparePatterns(void){
     if(this->currentPattern.length() != this->currentUserPattern.length()){
         return false;
     }
@@ -76,16 +76,23 @@ bool Game::comparePatterns(){
     sanatizePatterns(this->currentPattern);
     sanatizePatterns(this->currentUserPattern);
 
-    std::cout << this->currentPattern << std::endl;
-    std::cout << this->currentUserPattern<< std::endl;
-    
-    for(int i = 0; i < this->currentPattern.length(); i++){
+    for(size_t i = 0; i < this->currentPattern.length(); i++){
         if(this->currentPattern[i] != this->currentUserPattern[i]){
             return false;
         }
     }
 
     return true;
+}
+
+/**
+ * FUNCTION:    Outputs closing statements for the game 
+ * PARAMS:      VOID
+ * RETURNS:     VOID 
+ */
+void Game::wrapUpGame(void){
+    std::cout << "Game Over!\n";
+    std::cout << "Your final score: " << this->gameRound << std::endl;
 }
 
 /**
@@ -108,10 +115,17 @@ void Game::playGame(void){
             this->currentPattern = "";
             this->currentUserPattern = "";
             this->gameRound += 1;
+            
+            #ifdef _WIN32
+                system("cls");
+            #else 
+                system("clear");
+            #endif /* _WIN32*/
+            
         } else {
             /* Else end game and output score and round */
             gameOver = true;
-            // outputScore();
+            wrapUpGame();
         }
     }
 }
