@@ -17,10 +17,22 @@ void SimonSaysConfig::setDifficulty(void){
     //Logic Check for valid entry
     while(userIn < LOW_DIFFICULTY || userIn > HIGH_DIFFICULTY){
         std::cout << "Oops, Simon says to just type the number that corresponds with the game difficulty you would like\n";
+        
+        if(std::cin.fail()){
+            std::cin.clear();
+            std::cin.ignore(INT32_MAX, '\n');
+        }
+        
         std::cin >> userIn;
     }
 
     this->difficulty = userIn;
+    
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
 }
 
 /** 

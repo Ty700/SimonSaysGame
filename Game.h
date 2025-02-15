@@ -17,7 +17,8 @@ private:
     void generatePattern();
     void showPattern();
     void getUserPattern();
-
+    bool comparePatterns();
+    
     bool gameOver = false;
     unsigned int gameRound = 1;
     
