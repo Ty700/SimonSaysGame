@@ -1,1 +1,8 @@
+# VSCode 
 .vscode/
+
+#bin name
+Simsays
+
+# Used to direct output to file for debugging
+text.txt

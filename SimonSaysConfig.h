@@ -21,13 +21,13 @@ private:
     int difficulty {-1};
     
     /* Milliseconds */
-    const int LOW_DIFFICULTY    = 1;
+    constexpr static int LOW_DIFFICULTY         {1};
     constexpr static unsigned int LOW_TIMING    {3500};
     
-    const int MEDIUM_DIFFICULTY = 2;
+    constexpr static int MEDIUM_DIFFICULTY      {2};
     constexpr static unsigned int MEDIUM_TIMING {2500};
     
-    const int HIGH_DIFFICULTY   = 3;
+    const int HIGH_DIFFICULTY                   {3};
     constexpr static unsigned int HARD_TIMING   {1500};
 
     unsigned int timing {LOW_TIMING};
