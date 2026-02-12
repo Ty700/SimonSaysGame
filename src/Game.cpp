@@ -29,7 +29,7 @@ void Game::generatePattern(void){
  * @RETURNS:    VOID 
  */
 void Game::showPattern(void){
-    std::cout << "Simon Says to Enter:\n";
+    std::cout << "Simon Says to Remember:\n";
     std::cout << this->currentPattern << std::endl;
 
     std::this_thread::sleep_for(std::chrono::milliseconds(this->currentGameConfig->getTiming()));
@@ -93,6 +93,8 @@ bool Game::comparePatterns(void){
 void Game::wrapUpGame(void){
     std::cout << "Game Over!\n";
     std::cout << "Your final score: " << this->gameRound << std::endl;
+    std::cout << "You were told to enter: " << this->currentPattern << std::endl;
+    std::cout << "You entered: " << this->currentUserPattern << std::endl;
 }
 
 /**

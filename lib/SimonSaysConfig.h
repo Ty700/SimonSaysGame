@@ -2,6 +2,7 @@
 #define SIMON_SAYS_CONFIG_H
 
 #include <iostream>
+#include <stdint.h>
 
 class SimonSaysConfig {
 
